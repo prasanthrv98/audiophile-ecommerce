@@ -1,0 +1,66 @@
+@import "../../styles/variables";
+@import "../../styles/functions";
+
+.footer {
+  background-color: $color-dark;
+  padding-top: rem(75);
+  padding-bottom: rem(48);
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(36);
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+
+    &-menu {
+      display: flex;
+      gap: rem(34);
+
+      a:link,
+      a:visited {
+        color: $color-white;
+      }
+
+      a:hover,
+      a:active {
+        cursor: pointer;
+
+        color: $color-primary-dark;
+      }
+    }
+  }
+
+  &__text {
+    width: rem(540);
+    color: $color-text-light;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__copyrights {
+    color: $color-text-light;
+  }
+
+  &__socials {
+    display: flex;
+    gap: rem(16);
+
+    .icon {
+      width: rem(24);
+      height: rem(24);
+      color: $color-white;
+
+      &:hover {
+        color: $color-primary-dark;
+        cursor: pointer;
+      }
+    }
+  }
+}

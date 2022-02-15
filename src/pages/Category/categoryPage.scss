@@ -1,0 +1,19 @@
+@import "../../styles/functions";
+@import "../../styles/variables";
+
+.category-header {
+  width: 100%;
+  height: rem(239);
+  background-color: $color-hero-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-white;
+}
+
+.product-previews {
+  padding: rem(160) 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(160);
+}

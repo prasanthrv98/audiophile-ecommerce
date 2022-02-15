@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+@import "../../styles/functions";
+
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(32) rem(165) rem(36);
+  background-color: $color-hero-bg;
+
+  &__menu {
+    display: flex;
+    gap: rem(34);
+    list-style: none;
+    text-decoration: none;
+    letter-spacing: 2px;
+    cursor: pointer;
+
+    li {
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: white;
+      }
+
+      a:hover,
+      a:active {
+        color: $color-primary-dark;
+      }
+    }
+  }
+
+  &__cart-icon {
+    color: white;
+    cursor: pointer;
+  }
+
+  &__rule {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 77%;
+    background-color: rgba(255, 255, 255, 0.3);
+    height: 1px;
+    border: none;
+    margin: 0 auto;
+  }
+}

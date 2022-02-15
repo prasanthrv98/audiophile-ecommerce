@@ -1,0 +1,35 @@
+.btn {
+  width: rem(160);
+  height: rem(48);
+  border: none;
+}
+
+.btn-primary {
+  background-color: $color-primary-dark;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-primary-light;
+  }
+}
+
+.btn-secondary {
+  border: 1px solid $color-black;
+  color: $color-black;
+  background-color: $color-white;
+
+  &:hover {
+    color: $color-white;
+    background-color: $color-black;
+  }
+}
+
+.btn-tertiary {
+  color: $color-white;
+  background-color: $color-black;
+
+  &:hover {
+    color: $color-white;
+    background-color: #4c4c4c;
+  }
+}

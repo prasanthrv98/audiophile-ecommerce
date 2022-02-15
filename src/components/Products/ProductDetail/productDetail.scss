@@ -1,0 +1,39 @@
+@import "../../../styles/variables";
+@import "../../../styles/functions";
+
+.product-detail {
+  padding-top: rem(160);
+
+  &__hero {
+    display: flex;
+    gap: rem(125);
+    margin-bottom: rem(120);
+  }
+
+  &__gallery {
+    display: flex;
+    gap: rem(30);
+    .col-1 {
+      display: flex;
+      flex-direction: column;
+      gap: rem(32);
+
+      img {
+        border-radius: 8px;
+        width: rem(445);
+        height: rem(280);
+      }
+    }
+
+    .col-2 {
+      width: rem(1110);
+      height: rem(592);
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+      }
+    }
+  }
+}

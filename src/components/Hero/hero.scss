@@ -1,0 +1,24 @@
+@import "../../styles/variables";
+@import "../../styles/functions";
+
+.hero {
+  position: relative;
+  max-width: 100%;
+  height: rem(632);
+  background-image: url("../../assets/home/desktop/image-hero.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+
+  color: $color-white;
+
+  &__info {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: rem(35);
+    width: rem(379);
+    left: rem(165);
+    bottom: rem(158);
+  }
+}

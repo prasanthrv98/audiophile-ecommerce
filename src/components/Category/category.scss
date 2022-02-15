@@ -1,0 +1,61 @@
+@import "../../styles/functions";
+@import "../../styles/variables";
+
+.category {
+  display: flex;
+  gap: rem(30);
+  padding: rem(200) 0;
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(20);
+    position: relative;
+    width: rem(350);
+    height: rem(204);
+    background-color: $color-light;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      .category__btn {
+        color: $color-primary-dark;
+      }
+    }
+  }
+
+  &__image-box {
+    position: absolute;
+    top: rem(-90);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 250px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    bottom: rem(50);
+  }
+
+  &__btn {
+    position: absolute;
+    text-decoration: none;
+    bottom: rem(20);
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    color: rgba($color: #000000, $alpha: 0.5);
+
+    .btn-icon {
+      color: $color-primary-dark;
+      width: 15px;
+    }
+  }
+}

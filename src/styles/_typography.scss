@@ -1,0 +1,61 @@
+.heading-primary {
+  font-size: rem(56);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  line-height: rem(58);
+}
+
+.heading-secondary {
+  font-size: rem(40);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: rem(44);
+  letter-spacing: 1.5px;
+}
+
+.heading-tertiary {
+  font-size: rem(32);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: rem(36);
+  letter-spacing: 1.15px;
+}
+
+.heading-fourth {
+  font-size: rem(28);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: rem(38);
+  letter-spacing: 2px;
+}
+
+.heading-category {
+  font-size: rem(18);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: rem(24);
+  letter-spacing: 1.3px;
+}
+
+.text-primary {
+  font-size: rem(15);
+  font-weight: medium;
+  line-height: rem(25);
+}
+
+.text-overline {
+  font-size: rem(14);
+  font-weight: normal;
+  text-transform: uppercase;
+  line-height: rem(19);
+  letter-spacing: 10px;
+}
+
+.text-subtitle {
+  font-size: rem(13);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: rem(25);
+  letter-spacing: 1px;
+}

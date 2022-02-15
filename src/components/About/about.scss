@@ -1,0 +1,34 @@
+@import "../../styles/functions";
+@import "../../styles/variables";
+
+.about {
+  display: flex;
+  gap: rem(125);
+  padding-bottom: rem(168);
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(32);
+    width: rem(445);
+
+    span {
+      color: $color-primary-dark;
+    }
+    p {
+      color: rgba(#000, 0.5);
+    }
+  }
+
+  &__img {
+    width: rem(540);
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
