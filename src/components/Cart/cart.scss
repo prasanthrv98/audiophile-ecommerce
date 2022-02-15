@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+@import "../../styles/functions";
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+  position: absolute;
+  padding: rem(32);
+  right: rem(165);
+  top: rem(120);
+  width: rem(377);
+  height: auto;
+  background-color: $color-white;
+  border-radius: 8px;
+  z-index: 999;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__remove-btn {
+    border: none;
+    background: none;
+    color: $color-text-dark;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary-dark;
+      text-decoration-color: rgba($color-primary-dark, 0.2);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .checkout-btn {
+    width: 100%;
+  }
+}

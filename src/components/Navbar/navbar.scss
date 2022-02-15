@@ -8,6 +8,7 @@
   justify-content: space-between;
   padding: rem(32) rem(165) rem(36);
   background-color: $color-hero-bg;
+  z-index: 222;
 
   &__menu {
     display: flex;

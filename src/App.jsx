@@ -7,6 +7,8 @@ import { Route, Switch } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import ProductPage from "./pages/Product/ProductPage";
 import ScrollToTop from "./helper/ScrollToTop";
+import Cart from "./components/Cart/Cart";
+import Modal from "./UI/Modal/Modal";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -42,8 +44,6 @@ const App = () => {
     setCart(cart);
   };
 
-  console.log(cart);
-
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -51,7 +51,11 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar
+        cart={cart}
+        onClearCart={clearCartHandler}
+        onUpdateCartQty={updateCartQtyHandler}
+      />
       <ScrollToTop>
         <Switch>
           <Route path="/" exact>

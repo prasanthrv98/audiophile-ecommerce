@@ -2,7 +2,8 @@ import { CircularProgress } from "@material-ui/core";
 import "./productDetail.scss";
 
 const ProductDetail = ({ product, onAddToCart }) => {
-  if (Object.keys(product).length === 0) {
+  // gaurd clause -> return load spinner if there is no product untill there is a product object (Object?.keys(product)?.length === 0)
+  if (!product) {
     return (
       <div className="loading-spinner">
         <CircularProgress color="primary" />
