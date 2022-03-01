@@ -1,14 +1,13 @@
+import React, { useEffect, useState } from "react";
+import { Route, Switch } from "react-router-dom";
+import { commerce } from "./lib/commerce";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import CategoryPage from "./pages/Category/CategoryPage";
-import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import { commerce } from "./lib/commerce";
 import ProductPage from "./pages/Product/ProductPage";
 import ScrollToTop from "./helper/ScrollToTop";
-import Cart from "./components/Cart/Cart";
-import Modal from "./UI/Modal/Modal";
+import Checkout from "./pages/Checkout/Checkout";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -58,6 +57,10 @@ const App = () => {
       />
       <ScrollToTop>
         <Switch>
+          <Route path="/checkout" exact>
+            <Checkout cart={cart} />
+          </Route>
+
           <Route path="/" exact>
             <Home products={products} />
           </Route>

@@ -41,6 +41,7 @@ const Navbar = ({ cart, onUpdateCartQty, onClearCart }) => {
             cart={cart}
             onClearCart={onClearCart}
             onUpdateCartQty={onUpdateCartQty}
+            onClose={closeCart}
           />
         </Modal>
       )}

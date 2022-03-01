@@ -45,7 +45,9 @@ const ProductDetail = ({ product, onAddToCart }) => {
   return (
     <div className="product-detail">
       <div className="product-detail__hero">
-        <img src={desktopImg} alt="" className="product-preview__img" />
+        <div className="product-detail__img">
+          <img src={desktopImg} alt="" />
+        </div>
         <div className="product-preview__info">
           <h2 className="heading-secondary">{product.name}</h2>
           <p className="text-primary">{description}</p>

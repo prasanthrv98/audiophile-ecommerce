@@ -2,7 +2,7 @@ import "./cart.scss";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 
-const Cart = ({ cart, onUpdateCartQty, onClearCart }) => {
+const Cart = ({ cart, onUpdateCartQty, onClearCart, onClose }) => {
   console.log(cart);
 
   // Display if there is no items in the cart
@@ -41,6 +41,7 @@ const Cart = ({ cart, onUpdateCartQty, onClearCart }) => {
       <Link
         to="/checkout"
         className="btn btn-primary text-subtitle  checkout-btn"
+        onClick={onClose}
       >
         checkout
       </Link>

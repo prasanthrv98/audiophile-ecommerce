@@ -1,0 +1,17 @@
+.form-controller {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  .input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -0.21px;
+  }
+}
