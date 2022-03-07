@@ -12,6 +12,7 @@ import Checkout from "./pages/Checkout/Checkout";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
 
   const fetchProducts = async () => {
     const response = await commerce.products.list();
@@ -33,15 +34,40 @@ const App = () => {
     setCart(cart);
   };
 
-  const removeCartQtyHandler = async (productId) => {
-    const { cart } = await commerce.cart.remove(productId);
-    setCart(cart);
-  };
+  // const removeCartQtyHandler = async (productId) => {
+  //   const { cart } = await commerce.cart.remove(productId);
+  //   setCart(cart);
+  // };
 
   const clearCartHandler = async () => {
     const { cart } = await commerce.cart.empty();
     setCart(cart);
   };
+
+  const refreshCartHandler = async () => {
+    const { cart } = await commerce.cart.refresh();
+    setCart(cart);
+  };
+
+  // const checkoutHandler = async (checkoutTokenId, newOrder) => {
+  //   // pi_3KaazuSGrTIIqPQr1Sq1aY92_secret_7pDjNz2IvMflTnstcEM4wZZuC
+  //   try {
+  //     const incomingOrder = await commerce.checkout.capture(
+  //       checkoutTokenId,
+  //       newOrder
+  //     );
+
+  //     setOrder(incomingOrder);
+  //     refreshCart();
+  //     console.log("order sucessfull!!!");
+  //   } catch (error) {
+  //     console.log(error.data.error.param);
+  //     setPaymentErrorId(error.data.error.param);
+
+  //     console.log("checkout errorrr");
+  //     setErrorMessage(error.data.error.message);
+  //   }
+  // };
 
   useEffect(() => {
     fetchProducts();
@@ -58,7 +84,7 @@ const App = () => {
       <ScrollToTop>
         <Switch>
           <Route path="/checkout" exact>
-            <Checkout cart={cart} />
+            <Checkout cart={cart} onRefresh={refreshCartHandler} />
           </Route>
 
           <Route path="/" exact>

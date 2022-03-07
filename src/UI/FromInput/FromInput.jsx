@@ -10,7 +10,9 @@ const FromInput = ({
   pattern,
   value,
   onChange,
+  readonly,
 }) => {
+  if (inputName == "country") readonly = true;
   return (
     <div className={`${classes} form-controller`}>
       <div className="input-header">
@@ -26,6 +28,7 @@ const FromInput = ({
         pattern={pattern}
         value={value}
         onChange={onChange}
+        readOnly={readonly}
       />
       <div className="errorMsg">Wrong format</div>
     </div>

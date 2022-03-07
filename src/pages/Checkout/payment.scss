@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+@import "../../styles/functions";
+
+.payment-box {
+  span {
+    color: $color-primary-dark;
+  }
+
+  .input-box {
+    margin-top: rem(20);
+  }
+
+  button {
+    margin-top: rem(28);
+    width: 100%;
+  }
+}
