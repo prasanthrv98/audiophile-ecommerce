@@ -1,3 +1,5 @@
+@import "../../styles/functions";
+
 .form-controller {
   display: flex;
   flex-direction: column;
@@ -14,4 +16,14 @@
     font-weight: bold;
     letter-spacing: -0.21px;
   }
+}
+
+select {
+  background-color: white;
+  width: rem(280);
+  height: rem(56);
+  padding: rem(12);
+  outline: none;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
 }

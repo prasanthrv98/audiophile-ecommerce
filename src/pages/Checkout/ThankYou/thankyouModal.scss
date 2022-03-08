@@ -1,0 +1,30 @@
+@import "../../../styles/functions";
+@import "../../../styles/variables";
+
+.thankyou__container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: rem(540);
+  padding: rem(48);
+  border-radius: 8px;
+
+  .check-icon {
+    color: $color-primary-dark;
+    width: rem(64);
+    height: rem(64);
+  }
+
+  p {
+    color: $color-text-dark;
+  }
+
+  button {
+    width: 100%;
+  }
+}

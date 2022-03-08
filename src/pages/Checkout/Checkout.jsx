@@ -1,29 +1,84 @@
 import { useEffect, useState } from "react";
 import { commerce } from "../../lib/commerce";
-import FromInput from "../../UI/FromInput/FromInput";
+import FormInput from "../../UI/FormInput/FormInput";
 import "./checkout.scss";
 import PaymentForm from "./PaymentForm";
+import Modal from "../../UI/Modal/Modal";
+import ThankyouModal from "./ThankYou/ThankyouModal";
+import { useHistory } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
 
 const Checkout = ({ cart, onCheckout, onRefresh }) => {
-  const [formValues, setFormValues] = useState({
+  const INITIAL_FORM_VALUES = {
     name: "",
     email: "",
     phoneNumber: "",
     address: "",
     zipcode: "",
+    state: "",
     city: "",
     country: "US",
-  });
+  };
+  const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES);
   const [shippingData, setShippingData] = useState({});
   const [formValid, setFormValid] = useState(false);
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingSubdivisions, setShippingSubdivisions] = useState("");
+  const [orderSuccessFul, setOrderSuccessFul] = useState(false);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const history = useHistory();
 
-  // this will generate the checkout token
+  const subdivisions = Object.entries(shippingSubdivisions).map(
+    ([code, state]) => ({
+      id: code,
+      label: state,
+    })
+  );
+
+  const fetchSubdivisions = async () => {
+    const { subdivisions } = await commerce.services.localeListSubdivisions(
+      "US"
+    );
+    setShippingSubdivisions(subdivisions);
+  };
+
+  // after the payment submission
+  const paymentSubmissionHandler = (orderData) => {
+    setPaymentProcessing(false);
+    setFormValues(INITIAL_FORM_VALUES); // clear checkout form input fields.
+    console.log("latest order", orderData);
+    setOrderSuccessFul(true);
+  };
+
+  const paymentProcessingHandler = () => {
+    //scroll the page to top after payment button is clicked
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setPaymentProcessing(true);
+  };
+
+  const onChange = (event) => {
+    setFormValues({ ...formValues, [event.target.name]: event.target.value });
+  };
+
+  // take back to home page after successfull payment
+  const backToHomeHandler = () => {
+    setOrderSuccessFul(false);
+    history.replace("/");
+  };
+
+  // fetch the states for the US Country with country code.
+  useEffect(() => {
+    fetchSubdivisions();
+  }, []);
+
+  // this will generate the checkout token.
   useEffect(() => {
     const generateToken = async () => {
       try {
         if (cart?.line_items.length >= 1) {
-          console.log(cart);
           const token = await commerce.checkout.generateToken(cart?.id, {
             type: "cart",
           });
@@ -38,13 +93,13 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("btn clicked");
     console.log(formValues);
 
     const email = formValues.email;
     const name = formValues.name;
     const phoneNumber = formValues.phoneNumber;
     const address = formValues.address;
+    const state = formValues.state;
     const city = formValues.city;
     const zipcode = formValues.zipcode;
     const country = formValues.country;
@@ -52,32 +107,34 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
     let emailValid = false;
     let nameValid = false;
     let phoneValid = false;
-    let cityValid = false;
     let zipcodeValid = false;
+    let cityValid = false;
 
     if (
       email !== "" &&
       name !== "" &&
       phoneNumber !== "" &&
       address !== "" &&
+      state !== "" &&
       city !== "" &&
       zipcode !== ""
     ) {
       if (email.includes("@")) emailValid = true;
       if (/^[a-zA-Z\-]+$/.test(name)) nameValid = true;
       if (/^[0-9]{10}$/.test(phoneNumber)) phoneValid = true;
-      if (/^[a-zA-Z]+$/.test(city)) cityValid = true;
+      if (/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/.test(city)) cityValid = true;
       if (/^[0-9]{5}$/.test(zipcode)) zipcodeValid = true;
 
       // all the form inputs are valid
       // submit the checkout
-      if (emailValid && nameValid && phoneValid && cityValid && zipcodeValid) {
+      if (emailValid && nameValid && phoneValid && zipcodeValid && cityValid) {
         setFormValid(true);
         const data = {
           name,
           email,
           phoneNumber,
           address,
+          state,
           city,
           zipcode,
           country,
@@ -86,10 +143,6 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
         setShippingData(data);
       }
     }
-  };
-
-  const onChange = (event) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
   };
 
   return (
@@ -101,6 +154,21 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
         paddingBottom: "142px",
       }}
     >
+      {paymentProcessing && (
+        <Modal>
+          <div className="processing__container">
+            <CircularProgress disableShrink />
+            <h3 className="heading-category">
+              Please wait your payment is processing...
+            </h3>
+          </div>
+        </Modal>
+      )}
+      {orderSuccessFul && (
+        <Modal onClose={() => setOrderSuccessFul(false)}>
+          <ThankyouModal onClick={backToHomeHandler} />
+        </Modal>
+      )}
       <div className="checkout">
         <div className="checkout__col">
           <h3 className="heading-tertiary">checkout</h3>
@@ -109,9 +177,9 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
             <div className="form-box">
               <span className="text-subtitle">billing details</span>
               <div className="input-box">
-                <FromInput
+                <FormInput
                   inputType="text"
-                  placeholder="John doe"
+                  placeholder="John"
                   inputName="name"
                   labelName="Name"
                   inputStyle="inputStyle"
@@ -120,7 +188,7 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
                   pattern="^[a-zA-Z]{3,16}$"
                   readonly={formValid}
                 />
-                <FromInput
+                <FormInput
                   inputType="email"
                   placeholder="abc@example.com"
                   inputName="email"
@@ -130,7 +198,7 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
                   onChange={onChange}
                   readonly={formValid}
                 />
-                <FromInput
+                <FormInput
                   inputType="tel"
                   placeholder="923-222-2413"
                   inputName="phoneNumber"
@@ -147,7 +215,7 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
             <div className="form-box">
               <span className="text-subtitle">Shipping Info</span>
               <div className="input-box">
-                <FromInput
+                <FormInput
                   inputType="address"
                   placeholder="1137 Avenue Street"
                   inputName="address"
@@ -158,9 +226,9 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
                   onChange={onChange}
                   readonly={formValid}
                 />
-                <FromInput
-                  inputType=""
-                  placeholder="435 123"
+                <FormInput
+                  inputType="text"
+                  placeholder="94103"
                   inputName="zipcode"
                   labelName="Zip Code"
                   inputStyle="inputStyle"
@@ -169,18 +237,26 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
                   onChange={onChange}
                   readonly={formValid}
                 />
-                <FromInput
+                <FormInput
+                  inputName="state"
+                  labelName="State"
+                  inputStyle="select"
+                  value={subdivisions}
+                  readonly={formValid}
+                  onChange={onChange}
+                />
+                <FormInput
                   inputType="text"
-                  placeholder="New York"
                   inputName="city"
                   labelName="City"
                   inputStyle="inputStyle"
                   value={formValues.city}
                   onChange={onChange}
-                  pattern="^[a-zA-Z]{4,30}"
                   readonly={formValid}
+                  placeholder="San Francisco"
+                  pattern="^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$"
                 />
-                <FromInput
+                <FormInput
                   inputType="text"
                   inputName="country"
                   labelName="Country"
@@ -200,6 +276,8 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
               checkoutToken={checkoutToken}
               onCheckout={onCheckout}
               onRefresh={onRefresh}
+              onPaymentSubmit={paymentSubmissionHandler}
+              onPaymentProcess={paymentProcessingHandler}
             />
           )}
         </div>

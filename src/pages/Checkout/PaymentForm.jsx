@@ -15,7 +15,8 @@ const PaymentForm = ({
   price,
   shippingData,
   checkoutToken,
-
+  onPaymentSubmit,
+  onPaymentProcess,
   onRefresh,
 }) => {
   const [order, setOrder] = useState({});
@@ -26,6 +27,8 @@ const PaymentForm = ({
     if (!elements || !stripe) {
       return;
     }
+    // loader modal will show until payment is successfull
+    onPaymentProcess();
 
     const cardElement = elements.getElement(CardElement);
 
@@ -48,8 +51,8 @@ const PaymentForm = ({
           shipping: {
             name: shippingData.name,
             street: shippingData.address,
-            town_city: "San Francisco",
-            county_state: "CA",
+            town_city: shippingData.city,
+            county_state: shippingData.state,
             postal_zip_code: shippingData.zipcode,
             country: shippingData.country,
           },
@@ -69,6 +72,11 @@ const PaymentForm = ({
           );
           setOrder(incomingOrder);
           onRefresh();
+          setOrder((latestOrder) => {
+            return latestOrder;
+          });
+          if (order) onPaymentSubmit(order);
+
           console.log("Order successfull");
         } catch (response) {
           if (
@@ -109,7 +117,13 @@ const PaymentForm = ({
 
             setOrder(incomingOrder);
             onRefresh();
-            console.log("Order successfull");
+            setOrder((latestOrder) => {
+              return latestOrder;
+            });
+            if (order) {
+              onPaymentSubmit(order);
+              console.log("Order successfull", order);
+            }
           } catch (response) {
             console.log(response.message);
           }
