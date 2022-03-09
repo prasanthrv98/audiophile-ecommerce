@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { commerce } from "../../lib/commerce";
+import { CircularProgress } from "@material-ui/core";
 import FormInput from "../../UI/FormInput/FormInput";
 import "./checkout.scss";
-import PaymentForm from "./PaymentForm";
 import Modal from "../../UI/Modal/Modal";
 import ThankyouModal from "./ThankYou/ThankyouModal";
-import { useHistory } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import PaymentForm from "./PaymentForm";
 
 const Checkout = ({ cart, onCheckout, onRefresh }) => {
   const INITIAL_FORM_VALUES = {
@@ -169,6 +169,7 @@ const Checkout = ({ cart, onCheckout, onRefresh }) => {
           <ThankyouModal onClick={backToHomeHandler} />
         </Modal>
       )}
+
       <div className="checkout">
         <div className="checkout__col">
           <h3 className="heading-tertiary">checkout</h3>

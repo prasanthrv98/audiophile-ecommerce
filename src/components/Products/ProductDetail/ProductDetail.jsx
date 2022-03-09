@@ -1,5 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import "./productDetail.scss";
+import "../ProductPreview/productPreview.scss";
 
 const ProductDetail = ({ product, onAddToCart }) => {
   // gaurd clause -> return load spinner if there is no product untill there is a product object (Object?.keys(product)?.length === 0)
@@ -46,7 +47,7 @@ const ProductDetail = ({ product, onAddToCart }) => {
     <div className="product-detail">
       <div className="product-detail__hero">
         <div className="product-detail__img">
-          <img src={desktopImg} alt="" />
+          <img src={desktopImg} alt="product" />
         </div>
         <div className="product-preview__info">
           <h2 className="heading-secondary">{product.name}</h2>
@@ -65,11 +66,11 @@ const ProductDetail = ({ product, onAddToCart }) => {
 
       <div className="product-detail__gallery">
         <div className="col-1">
-          <img src={desktopGalleryImg1} alt="" className="gallery-1" />
-          <img src={desktopGalleryImg2} alt="" className="gallery-1" />
+          <img src={desktopGalleryImg1} alt="product" className="gallery-1" />
+          <img src={desktopGalleryImg2} alt="product" className="gallery-1" />
         </div>
         <div className="col-2">
-          <img src={desktopGalleryImg3} alt="" className="gallery-1" />
+          <img src={desktopGalleryImg3} alt="product" className="gallery-1" />
         </div>
       </div>
     </div>

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import "./hero.scss";
-// import heroImage from "../../assets/home/desktop/image-hero.jpg";
 
-const Hero = () => {
+const Hero = ({ products }) => {
+  const xx99Mark_2 = products?.filter((prod) =>
+    prod.name.includes("XX99 Mark II")
+  )[0];
+
   return (
     <header className="hero">
       <div className="hero__info">
@@ -12,7 +15,7 @@ const Hero = () => {
           for the passionate music enthusiast.
         </p>
         <Link
-          to="headphones/xx99-mark2"
+          to={`headphones/${xx99Mark_2?.id}`}
           className="btn btn-primary text-subtitle"
         >
           see product

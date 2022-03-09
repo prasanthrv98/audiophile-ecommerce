@@ -45,7 +45,6 @@ const PaymentForm = ({
           line_items: checkoutToken.live.line_items,
           customer: {
             firstname: shippingData.name,
-            lastname: "rv",
             email: shippingData.email,
           },
           shipping: {

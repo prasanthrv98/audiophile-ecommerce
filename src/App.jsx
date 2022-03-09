@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
-import CategoryPage from "./pages/Category/CategoryPage";
-import ProductPage from "./pages/Product/ProductPage";
 import ScrollToTop from "./helper/ScrollToTop";
-import Checkout from "./pages/Checkout/Checkout";
+import { CircularProgress } from "@material-ui/core";
+// import CategoryPage from "./pages/Category/CategoryPage";
+// import ProductPage from "./pages/Product/ProductPage";
+// import Checkout from "./pages/Checkout/Checkout";
+
+const CategoryPage = lazy(() => import("./pages/Category/CategoryPage"));
+const ProductPage = lazy(() => import("./pages/Product/ProductPage"));
+const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -55,23 +60,31 @@ const App = () => {
         onClearCart={clearCartHandler}
         onUpdateCartQty={updateCartQtyHandler}
       />
-      <ScrollToTop>
-        <Switch>
-          <Route path="/checkout" exact>
-            <Checkout cart={cart} onRefresh={refreshCartHandler} />
-          </Route>
+      <Suspense
+        fallback={
+          <div className="loading-spinner">
+            <CircularProgress />
+          </div>
+        }
+      >
+        <ScrollToTop>
+          <Switch>
+            <Route path="/checkout" exact>
+              <Checkout cart={cart} onRefresh={refreshCartHandler} />
+            </Route>
 
-          <Route path="/" exact>
-            <Home products={products} />
-          </Route>
-          <Route path="/:categoryName" exact>
-            <CategoryPage products={products} />
-          </Route>
-          <Route path="/:categoryName/:productId" exact>
-            <ProductPage products={products} onAddToCart={addToCartHandler} />
-          </Route>
-        </Switch>
-      </ScrollToTop>
+            <Route path="/" exact>
+              <Home products={products} />
+            </Route>
+            <Route path="/:categoryName" exact>
+              <CategoryPage products={products} />
+            </Route>
+            <Route path="/:categoryName/:productId" exact>
+              <ProductPage products={products} onAddToCart={addToCartHandler} />
+            </Route>
+          </Switch>
+        </ScrollToTop>
+      </Suspense>
       <Footer />
     </>
   );

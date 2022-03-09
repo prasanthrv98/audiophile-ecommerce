@@ -5,7 +5,19 @@ import speaker1Img from "../../assets/home/desktop/image-speaker-zx9.png";
 import speaker2ImgDesktop from "../../assets/home/desktop/image-speaker-zx7.jpg";
 
 import earphoneImgDektop from "../../assets/home/desktop/image-earphones-yx1.jpg";
-const Products = () => {
+const Products = ({ products }) => {
+  const zx9 = products?.filter(
+    (prod) => prod.name.toLowerCase() === "zx9 speaker"
+  )[0];
+
+  const zx7 = products?.filter(
+    (prod) => prod.name.toLowerCase() === "zx7 speaker"
+  )[0];
+
+  const yx1 = products?.filter(
+    (prod) => prod.name.toLowerCase() === "yx1 wireless earphones"
+  )[0];
+
   return (
     <section className="products">
       {/* speaker zx9 */}
@@ -20,7 +32,7 @@ const Products = () => {
             truly remarkable sound.
           </p>
           <Link
-            to="/speakers/zx9-speaker"
+            to={`/speakers/${zx9?.id}`}
             className="btn btn-tertiary text-subtitle"
           >
             see product
@@ -36,7 +48,7 @@ const Products = () => {
         <div className="products__speaker2-info container">
           <h4 className="heading-fourth">ZX7 SPEAKER</h4>
           <Link
-            to="/speakers/zx9-speaker"
+            to={`/speakers/${zx7?.id}`}
             className="btn btn-secondary text-subtitle"
           >
             see product
@@ -54,7 +66,7 @@ const Products = () => {
           <div className="container">
             <h4 className="heading-fourth">YX1 EARPHONES</h4>
             <Link
-              to="/earphones/yx1-earphone"
+              to={`/earphones/${yx1?.id}`}
               className="btn btn-secondary text-subtitle"
             >
               see product
