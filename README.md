@@ -1,6 +1,6 @@
 # Audiophile E Commerce Web App
 
-[Web App Link] (https://audophile-ecommerce.web.app/)
+[Audiophile E-commerce Link](https://audophile-ecommerce.web.app/)
 
 ## Overview
 
