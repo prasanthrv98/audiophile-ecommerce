@@ -2,11 +2,11 @@
 
 [Web App Link] (https://audophile-ecommerce.web.app/)
 
-### Overview
+## Overview
 
-** This application allows user to order a product and do payments and get email notification of their order summary. **
+**This application allows user to order a product and do payments and get email notification of their order summary.**
 
-### Technology Used Are
+## Technology Used Are
 
 - React Js
 - Sass for Styling
